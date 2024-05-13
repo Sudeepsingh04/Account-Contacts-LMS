@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Account Records" icon-name="standard:account">
+        <div class="slds-p-horizontal_small">
+            <lightning-input type="search" value={accountName} onchange={handleKeyChange}></lightning-input>
+        </div>
+
+        <div if:true={messageResult} class="slds-p-horizontal_small">
+            <p class="slds-text-color_error">No Result Found!</p>
+        </div>
+
+        <template if:true={showSearchedValues}>
+            <div class="slds-p-horizontal_small">
+
+                <ul class="slds-list_vertical-space">
+                    <template for:each={accountList} for:item="accObj">
+                        <li key={accObj.Id} onclick={handleParentSelection} 
+                            data-value={accObj.Id} 
+                            data-label={accObj.Name}
+                            class="slds-p-around_small slds-text-link" 
+                            style="cursor: pointer;">
+                            {accObj.Name}
+                        </li>
+                    </template>
+                </ul>
+
+                <div if:true={accountId} class="slds-p-horizontal_small">
+                    <p class="slds-text-heading_small">Selected Account Id: {accountId}</p>
+                </div>
+                <div if:true={accountName} class="slds-p-horizontal_small">
+                    <p class="slds-text-heading_small">Selected Account Name: {accountName}</p>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>
